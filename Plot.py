@@ -20,13 +20,13 @@ class Plot():
         curve, tangent_points, curvature_points = h.get()
 
 
-        plt.plot(curve[:, 0], curve[:, 1], label='Curva Hermite de Grau 5')
+        plt.plot(curve[:, 0], curve[:, 1], label='Curva')
         plt.scatter([p0[0], p1[0]], [p0[1], p1[1]], c='red', label='Pontos de Controle')
         plt.quiver(tangent_points[:, 0], tangent_points[:, 1], [v0[0], v1[0]], [v0[1], v1[1]], color='blue', label='Vetores Tangentes')
         plt.quiver(curvature_points[:, 0], curvature_points[:, 1], [c0[0], c1[0]], [c0[1], c1[1]], color='green', label='Vetores de Curvatura')
         plt.xlabel('Eixo x')
         plt.ylabel('Eixo y')
-        plt.title('Curva Hermite de Grau 5')
+        plt.title('Curva Hermite Grau 5')
         plt.legend()
         plt.grid(True)
         plt.show()

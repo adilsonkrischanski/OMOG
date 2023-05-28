@@ -20,8 +20,6 @@ class Hemite:
         self.hermite_curve()
 
         
-
-
     def H(self, t, p0, p1, v0, v1, c0, c1):
         a = -6 * p0 + 6 * p1 - 3 * v0 - 3 * v1 + c0 + c1
         b = 15 * p0 - 15 * p1 + 8 * v0 + 7 * v1 - 3 * c0 - 2 * c1
@@ -29,7 +27,6 @@ class Hemite:
         d = 0.5 * v0
         e = p0
         
-        # Avaliação da função Hermite de grau 5
         result = a * t**5 + b * t**4 + c * t**3 + d * t**2 + e * t
         
         return result
@@ -44,16 +41,12 @@ class Hemite:
         c0 = self.cv[0].get()
         c1 = self.cv[1].get()
 
-
-        # Avaliar a função Hermite de grau 5 em cada valor de t
         self.curve = np.array([self.H(t_i, p0, p1, v0, v1, c0, c1) for t_i in t])
 
-        # Calcular os pontos dos vetores tangentes
         tangent_start = p0
         tangent_end = p0 + v0
         self.tangent_points = np.array([tangent_start, tangent_end])
 
-        # Calcular os pontos dos vetores de curvatura
         curvature_start = p0
         curvature_end = p0 + c0
         self.curvature_points = np.array([curvature_start, curvature_end])
