@@ -15,8 +15,6 @@ class Vector:
         return np.array([self.x, self.y])
 
 
-    
-
 class Pointer:
     def __init__(self,x,y) -> None:
         self.x = x
