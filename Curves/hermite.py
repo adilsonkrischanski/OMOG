@@ -54,5 +54,8 @@ class Hemite:
     
     def get(self):
         return self.curve, self.tangent_points,self.curvature_points
+    
+    def last_poiter(self):
+        return self.curve[len(self.curve)-1]
 
 

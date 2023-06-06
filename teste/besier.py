@@ -12,7 +12,8 @@ def bezier_curve(p0, p1, p2, p3, num_points):
          3 * (1 - t)**2 * t * p1[1] +
          3 * (1 - t) * t**2 * p2[1] +
          t**3 * p3[1])
-
+    
+    print(x,y)
     return x, y
 
 # Pontos de controle da curva de Bézier
