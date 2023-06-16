@@ -25,9 +25,9 @@ class Besier():
             t**3 * self.p[3].get_y() )
         
 
-    def rotation(self,pointerBaseX,pointerBaseY):
+    def rotation(self,pointerBaseX, pointerBaseY):
         for pointer in self.p:
-            pointer.translate(pointerBaseX,pointerBaseY)
+            pointer.translate(pointerBaseX, pointerBaseY)
         self.bezier_curve()
         
         
@@ -36,4 +36,6 @@ class Besier():
     
     def get_curve_y(self):
         return self.curve_y
+    
+    
 

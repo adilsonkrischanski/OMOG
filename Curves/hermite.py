@@ -7,55 +7,52 @@ from .Base import Pointer
 from .Base import Vector
 
 
-class Hemite:
-    def __init__(self, pointers, Tvectors, Cvectors):
-        self.p = pointers
-        self.tv = Tvectors
-        self.cv = Cvectors
+class Hermite():
+    def __init__(self, pointers, vectors, n_points):
 
-        self.curve = []
-        self.tangent_points = []
-        self.curvature_points = []
+        self.p = pointers
+        self.v = vectors
+        self.num_points = n_points
+   
+        self.curve_x = []
+        self.curve_y = []
 
         self.hermite_curve()
 
         
-    def H(self, t, p0, p1, v0, v1, c0, c1):
-        a = -6 * p0 + 6 * p1 - 3 * v0 - 3 * v1 + c0 + c1
-        b = 15 * p0 - 15 * p1 + 8 * v0 + 7 * v1 - 3 * c0 - 2 * c1
-        c = -10 * p0 + 10 * p1 - 6 * v0 - 4 * v1 + 3 * c0 + c1
-        d = 0.5 * v0
-        e = p0
-        
-        result = a * t**5 + b * t**4 + c * t**3 + d * t**2 + e * t
-        
-        return result
-
-
     def hermite_curve(self):
-        t = np.linspace(0, 1, 100)
-        p0 = self.p[0].get()
-        p1 = self.p[1].get()
-        v0 = self.tv[0].get()
-        v1 = self.tv[1].get()
-        c0 = self.cv[0].get()
-        c1 = self.cv[1].get()
+        t = np.linspace(0, 1, self.num_points)
+        t2 = t * t
+        t3 = t2 * t
+        h00 = 2*t3 - 3*t2 + 1
+        h01 = -2*t3 + 3*t2
+        h02 = t3 - 2*t2 + t
+        h03 = t3 - t2
+        h04 = -2*t3 + 3*t2 - t
+        h05 = t3 - t2
 
-        self.curve = np.array([self.H(t_i, p0, p1, v0, v1, c0, c1) for t_i in t])
+        self.curve_x = h00 * self.p[0].get_x() + h01 * self.p[1].get_x() + h02 * self.v[0].get_x() + h03 * self.v[1].get_x() + h04 * self.v[0].get_x() + h05 * self.v[1].get_x()
 
-        tangent_start = p0
-        tangent_end = p0 + v0
-        self.tangent_points = np.array([tangent_start, tangent_end])
-
-        curvature_start = p0
-        curvature_end = p0 + c0
-        self.curvature_points = np.array([curvature_start, curvature_end])
+        self.curve_y = h00 * self.p[0].get_y() + h01 * self.p[1].get_y() + h02 * self.v[0].get_y() + h03 * self.v[1].get_y() + h04 * self.v[0].get_y() + h05 * self.v[1].get_y() 
 
     
+    def get_pointers(self):
+        return self.p
+
     def get(self):
-        return self.curve, self.tangent_points,self.curvature_points
+        return self.curve_x, self.curve_y
     
-    def last_poiter(self):
-        return self.curve[len(self.curve)-1]
+    def get_x(self):
+        return self.curve_x
 
+    def get_y(self):
+        return self.curve_y
+    
+    def last_pointer(self):
+        return self.curve_x[len(self.curve_x)-1], self.curve_y[len(self.curve_y)-1]
+    
 
+    
+    
+
+    

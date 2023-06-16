@@ -23,13 +23,11 @@ class Pointer:
         self.POY = 0
 
 
-    def translate(self, dx,dy):
+    def translate(self, dx, dy):
         self.POX = dx
         self.POY = dy
         self.x += self.POX
         self.y += self.POY
-
-
     
     def get_x(self):
         return self.x
