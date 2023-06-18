@@ -63,9 +63,9 @@ class Plot():
         Q3 = pointers_b[3].get()
 
         Q0_adjusted = Pointer(P1[0],P1[1])
-        Q1_adjusted = Pointer(Q1[0],Q1[1])
-        Q2_adjusted = Pointer(Q2[0],Q2[1])
-        Q3_adjusted = Pointer(Q3[0],Q3[1])
+        Q1_adjusted = Pointer(Q1[0]+P1[0],Q1[1]+P1[1])
+        Q2_adjusted = Pointer(Q2[0]+P1[0],Q2[1]+P1[1])
+        Q3_adjusted = Pointer(Q3[0]+P1[0],Q3[1]+P1[1])
 
         besier =  Besier([Q0_adjusted, Q1_adjusted, Q2_adjusted, Q3_adjusted], amoutPointers)
 
@@ -108,9 +108,9 @@ class Plot():
 
 
         Q0_adjusted = Pointer(P1[0], P1[1])
-        Q1_adjusted = Pointer(Q1[0] + (P1[0] - T0[0]), Q1[1] + (P1[1] - T0[1]))
-        Q2_adjusted = Pointer(Q2[0] + (P1[0] - T1[0]), Q2[1] + (P1[1] - T1[1]))
-        Q3_adjusted = Pointer(Q3[0], Q3[1])
+        Q1_adjusted = Pointer(Q1[0] + (P1[0] - T0[0])+P1[0], Q1[1] + (P1[1] - T0[1])+P1[1])
+        Q2_adjusted = Pointer(Q2[0] + (P1[0] - T1[0])+P1[0], Q2[1] + (P1[1] - T1[1])+P1[1])
+        Q3_adjusted = Pointer(Q3[0]+P1[0], Q3[1]+P1[1])
 
         besier =  Besier([Q0_adjusted, Q1_adjusted, Q2_adjusted, Q3_adjusted], amoutPointers)
 
@@ -152,10 +152,8 @@ class Plot():
         Q0_adjusted = Pointer(P1[0], P1[1])
         Q1_adjusted = Pointer(P1[0] + (T0[0] - P0[0]) / 3, P1[1] + (T0[1] - P0[1]) / 3)
         Q2_adjusted = Pointer(P1[0] + (T1[0] - P1[0]) / 3, P1[1] + (T1[1] - P1[1]) / 3)
-        Q3_adjusted = Pointer(Q3[0], Q3[1])
-        Q1_second_derivative = ((T0[0] - P0[0]) - (P1[0] - T0[0])) / 3
-        Q2_second_derivative = ((T1[0] - P1[0]) - (Q3[0] - T1[0])) / 3
-
+        Q3_adjusted = Pointer(Q3[0] + P1[0], Q3[1] + P1[1])
+       
         besier = Besier([Q0_adjusted, Q1_adjusted, Q2_adjusted, Q3_adjusted],amoutPointers)
 
         x_hermite = hermite.get_x()
